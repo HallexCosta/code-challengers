@@ -1,6 +1,6 @@
 import { readdir, rename } from 'node:fs/promises'
 
-async function main() {
+async function load(): Promise<void> {
   const fileNames = await readdir('./leet-code')
 
   for (const fileName of fileNames) {
@@ -17,4 +17,4 @@ async function main() {
     await rename(old_filename, new_filename)
   }
 }
-main()
+load()
