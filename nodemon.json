@@ -1,0 +1,6 @@
+{
+  "ext": "ts",
+  "exec": "ts-node --transpile-only",
+  "watch": ["leet-code", "index.ts"],
+  "ignore": ["./node_modules"]
+}
