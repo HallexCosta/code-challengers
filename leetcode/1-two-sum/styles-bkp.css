@@ -1,0 +1,43 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap');
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  outline: none;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border: 1px solid red;
+  font-family: Inter, Arial, 'sans-serif';
+  font-weight: 400;
+  margin: 10% 25%;
+}
+.container .elements {
+  display: flex;
+}
+.container .elements .numbers {
+  border: 1px solid red;
+}
+span {
+  border: 1px solid orange;
+  font-size: 50px;
+}
+
+.container .elements .target {
+  width: 100px;
+  border: 1px solid red;
+}
+
+.container .pointers {
+  display: flex;
+}
+.container .pointers .last-pointer,
+.container .pointers .start-pointer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}

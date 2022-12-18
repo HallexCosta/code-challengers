@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Two Sum</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!--<script src="https://cdn.tailwindcss.com"></script>-->
+  <link rel="stylesheet" href="style.css">
+  <!--<link rel="stylesheet" href="./styles.css">-->
+</head>
+<body class="bg-indigo-100 h-screen">
+  <div class="w-100 flex flex-col border border-blue-600">
+    <div class="flex text-5xl w-full">
+      <div id="nums" class="border border-red-600">
+        <span>1</span>
+        <span>2</span>
+        <span>3</span>
+        <span>4</span>
+
+        <div id="pointers" class="flex relative border border-red-600 w-full">
+          <div id="start-pointer" class="flex flex-col text-xs text-green-600 absolute left-[4%]">
+            <strong>/\</strong>
+            <small hidden>start pointer</small>
+          </div>
+          <div id="last-pointer" class="flex flex-col items-center text-xs text-red-600 absolute right-[2%]">
+            <strong>/\</strong>
+            <small hidden>last pointer</small>
+          </div>
+        </div>
+      </div>
+
+      <div class="flex ml-2">
+        <span>=</span>
+        <span id="sum">NONE VALUE</span>
+      </div>
+    </div>
+
+    <div class="mt-8 text-2xl">
+      <span>Target: </span>
+      <span id="target">6</span>
+    </div>
+  </div>
+  <script type="module">
+    const htmlLastPointer = document.getElementById('last-pointer')
+    const htmlStartPointer = document.getElementById('start-pointer')
+    const nums = Array.from(document.querySelectorAll('#nums>span')).map(element => Number(element.textContent))
+    const target = Number(document.getElementById('target').textContent)
+    const htmlSum = document.getElementById('sum')
+    console.log(target)
+
+    let moveStartPointerId = null
+    let moveLastPointerId = null
+    let startPointer = 0
+    let startPointerCount = 1
+
+    let lastPointer = nums.length - 1
+    let lastPointerCount = 1
+
+    const pointers = {
+      increment: 30,
+      move_speed: 50,
+      result: null,
+      start: {
+        pos: 4
+      },
+      last: {
+        pos: 2
+      }
+    }
+    const increment = 30
+    let id = setInterval(movePointers, pointers.move_speed)
+    let nextLastPos = 0
+    function delay(ms) {
+      return new Promise(resolve => setTimeout(resolve, ms))
+    }
+
+    function moveStartPointer() {
+      console.log('dispared')
+      if (pointers.start.pos === (increment * startPointerCount)) {
+        lastPointerCount = 1
+        lastPointer = nums.length - 1
+        htmlLastPointer.style.right = pointers.last.pos + '%'
+        clearInterval(moveStartPointerId)
+        moveLastPointerId = setInterval(resetLastPointer, pointers.move_speed)
+        return 
+      }
+      htmlStartPointer.style.left = pointers.start.pos + '%'
+      pointers.start.pos++
+    }
+    function resetLastPointer() {
+      console.log('dispared last')
+      const sum = nums[startPointer] + nums[lastPointer]
+      console.log('moveLastPointer', sum)
+      if (sum === target) {
+        htmlSum.innerText = sum
+        clearInterval(moveLastPointerId)
+        return clearInterval(id)
+      }
+
+      if (pointers.last.pos === (increment * lastPointerCount)) {
+        clearInterval(moveLastPointerId)
+        id = setInterval(movePointers, pointers.move_speed)
+        return 
+      }
+      htmlLastPointer.style.right = pointers.last.pos + '%'
+      pointers.last.pos++
+    }
+
+    async function movePointers() {
+      console.log(pointers.last.pos)
+
+      const sum = nums[startPointer] + nums[lastPointer]
+      htmlSum.innerText = sum
+      pointers.result = sum
+
+      if (sum === target) {
+        console.log('resultado', sum)
+        return clearInterval(id)
+      }
+      console.log('soma resultado', sum)
+
+      console.log('increment', increment * lastPointerCount, lastPointerCount)
+      // reset last-pointer position and move start-pointer to next
+      if (lastPointerCount == nums.length - 1) {
+        pointers.last.pos = 2
+        return setTimeout(async () => {
+          nums.shift()
+          clearInterval(id)
+          moveStartPointerId = setInterval(moveStartPointer, pointers.move_speed)
+          //await delay(2000)
+
+          //lastPointerCount = 1
+          //lastPointer = 0
+          //pointers.start.pos++
+          //id = setInterval(movePointers, pointers.move_speed)
+        })
+      }
+
+      if (pointers.start.pos === (increment * startPointerCount)) {
+        nextLastPos = pointers.start.pos + increment
+        clearInterval(id)
+        setTimeout(() => id = setInterval(movePointers, pointers.move_speed))
+        await delay(2000)
+        lastPointer++
+        lastPointerCount++
+        return
+      }
+
+      if (pointers.last.pos === (increment * lastPointerCount)) {
+        nextLastPos = pointers.last.pos + increment
+        clearInterval(id)
+        lastPointer--
+        lastPointerCount++
+        setTimeout(() => id = setInterval(movePointers, pointers.move_speed), 500)
+        return
+      }
+
+      htmlStartPointer.style.left = pointers.start.pos + '%'
+      htmlLastPointer.style.right = pointers.last.pos + '%'
+      pointers.last.pos++
+      //pointers.start.pos++
+    }
+
+  </script>
+</body>
+</html>

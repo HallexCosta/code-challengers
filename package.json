@@ -7,16 +7,19 @@
   "main": "index.js",
   "license": "MIT",
   "scripts": {
-    "start": "node -r ts-node/register --test leet-code",
+    "start": "node -r ts-node/register --test",
+    "start:front": "http-server",
     "dev": "nodemon"
   },
   "devDependencies": {
     "@types/node": "^18.11.11",
     "nodemon": "^2.0.20",
+    "tailwindcss": "^3.2.4",
     "ts-node": "^10.9.1",
     "typescript": "^4.9.3"
   },
   "dependencies": {
+    "http-server": "^14.1.1",
     "typescript-language-server": "^2.1.0"
   }
 }

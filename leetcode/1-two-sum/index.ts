@@ -2,7 +2,30 @@
 import {describe, it} from 'node:test'
 import { deepStrictEqual } from 'node:assert'
 
+
 function twoSum(nums: number[], target: number): number[] {
+  const nums_size = Number(nums.length)
+  let pointer = 0
+  let last_pointer = nums_size - 1
+  while (pointer <= last_pointer) {
+    if (last_pointer === pointer) {
+      pointer++
+      last_pointer = nums_size - 1
+    }
+
+    const sum = nums[pointer] + nums[last_pointer]
+    if (sum === target) {
+      return [pointer, last_pointer]
+    }
+
+    last_pointer--
+  }
+
+  return [0]
+}
+
+// this is old version two sum
+function twoSumOld(nums: number[], target: number): number[] {
     for (const numIndex in nums) {
       for (const numIndex2 in nums) {
         const numNextIndex = Number(numIndex2) + 1
