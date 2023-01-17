@@ -7,6 +7,9 @@
   "main": "index.js",
   "license": "MIT",
   "scripts": {
+    "test": "tap --ts",
+    "cov": "rimraf ./coverage && tap --ts --coverage-report=html",
+    "cov:view": "http-server ./coverage/lcov-report",
     "start": "node -r ts-node/register --test",
     "start:front": "http-server",
     "dev": "nodemon"
@@ -20,6 +23,8 @@
   },
   "dependencies": {
     "http-server": "^14.1.1",
+    "rimraf": "^4.1.0",
+    "tap": "^16.3.4",
     "typescript-language-server": "^2.1.0"
   }
 }
