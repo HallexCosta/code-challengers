@@ -24,7 +24,6 @@ describe('#findMedianSortedArrays', () => {
       const result = findMedianSortedArrays(entries.nums1, entries.nums2)
       const expected = 2.5
       deepStrictEqual(result, expected)
-
     })
     it('arrays in any order', () => {
       const entries = {

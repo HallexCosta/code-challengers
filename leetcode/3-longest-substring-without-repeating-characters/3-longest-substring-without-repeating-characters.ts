@@ -2,7 +2,7 @@ export function lengthOfLongestSubstring(s: string): number {
   let a_pointer = 0
   let b_pointer = 0
   let max = 0
-  
+
   const set = new Set()
 
   //console.log('string analyse:', s)
@@ -18,7 +18,7 @@ export function lengthOfLongestSubstring(s: string): number {
       max = Math.max(set.size, max)
     } else {
       //console.log('delete')
-      set.delete(a_char) 
+      set.delete(a_char)
       a_pointer++
     }
     //console.log('a_pointer', a_pointer)
@@ -28,4 +28,3 @@ export function lengthOfLongestSubstring(s: string): number {
 
   return max
 }
-

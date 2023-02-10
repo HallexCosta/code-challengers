@@ -1,10 +1,8 @@
 {
-  "ts-node": {
-    "transpileOnly": true
-  },
   "name": "exercise-algorithms",
   "version": "1.0.0",
   "main": "index.js",
+  "private": true,
   "license": "MIT",
   "scripts": {
     "test": "tap --ts",
@@ -12,19 +10,26 @@
     "cov:view": "http-server ./coverage/lcov-report",
     "start": "node -r ts-node/register --test",
     "start:front": "http-server",
-    "dev": "nodemon"
+    "dev": "nodemon",
+    "format": "prettier --write leetcode --config ./prettier.json"
   },
   "devDependencies": {
     "@types/node": "^18.11.11",
     "nodemon": "^2.0.20",
+    "prettier": "^2.8.4",
     "tailwindcss": "^3.2.4",
     "ts-node": "^10.9.1",
+    "tsx": "^3.12.3",
     "typescript": "^4.9.3"
   },
   "dependencies": {
     "http-server": "^14.1.1",
+    "lerna": "^6.4.1",
     "rimraf": "^4.1.0",
     "tap": "^16.3.4",
     "typescript-language-server": "^2.1.0"
-  }
+  },
+  "workspaces": [
+    "packages/*"
+  ]
 }

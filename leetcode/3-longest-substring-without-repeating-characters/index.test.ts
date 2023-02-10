@@ -1,6 +1,6 @@
 import { describe, it } from 'node:test'
 import { deepStrictEqual } from 'node:assert'
-import {lengthOfLongestSubstring } from './3-longest-substring-without-repeating-characters'
+import { lengthOfLongestSubstring } from './3-longest-substring-without-repeating-characters'
 
 describe('03 - longest substring', () => {
   it('Must be find sequence without repeating characters', () => {
@@ -36,4 +36,3 @@ describe('03 - longest substring', () => {
     deepStrictEqual(lengthOfLongestSubstring(input), 2)
   })
 })
-
